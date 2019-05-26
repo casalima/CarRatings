@@ -7,7 +7,7 @@ Implements a **Car Rating** system. It contains the folling three (3) microservi
 - CarInfo
 - Ratings
 
-![Logic](plan.JPG)
+![Logic](Plan.JPG)
 
 ## Versions
 
