@@ -1,0 +1,5 @@
+
+module=$1
+
+cd $1
+docker build -t $1:latest .

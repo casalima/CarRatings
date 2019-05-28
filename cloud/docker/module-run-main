@@ -1,0 +1,1 @@
+docker run -d -p 8081:8081 --add-host car-info-service:192.168.1.151 --add-host rating-data-service:192.168.1.151 --rm car-catalog-service:latest

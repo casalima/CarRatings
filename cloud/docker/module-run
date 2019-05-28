@@ -1,0 +1,14 @@
+
+module=$1
+
+if [ ${module} = "car-catalog-service" ]
+then
+   port=8081
+elif [ ${module} = "car-info-service" ]
+then
+   port=8082
+else
+   port=8083
+fi 
+
+docker run -d -p $port:$port --rm $module:latest
