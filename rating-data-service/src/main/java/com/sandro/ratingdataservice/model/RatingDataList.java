@@ -7,6 +7,8 @@ public class RatingDataList {
 	
 	private List<RatingData> ratings;
 
+	// Constructors
+	
 	public RatingDataList() {
 		this.ratings = new ArrayList<RatingData>();
 	}
@@ -16,6 +18,8 @@ public class RatingDataList {
 		this.ratings = ratings;
 	}
 
+	// Getters/setters
+	
 	public List<RatingData> getRatings() {
 		return ratings;
 	}

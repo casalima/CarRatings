@@ -8,6 +8,12 @@ public class RatingData {
 	public int userId;
 	public int rating;
 	
+	// Constructors
+	
+	public RatingData() {
+		super();
+	}
+
 	public RatingData(int year, int brandId, int modelId, int userId, int rating) {
 		super();
 		this.year = year;
@@ -17,6 +23,8 @@ public class RatingData {
 		this.rating = rating;
 	}
 
+	// Getters/Setters
+	
 	public int getYear() {
 		return year;
 	}
