@@ -1,0 +1,92 @@
+
+------------ STAR SETTING : CAR-CATALOG -------------
+
+kubectl get namespaces 
+kubectl apply -f car-rating-namespace.yaml
+kubectl get namespaces 
+kubectl get namespace car-rating
+
+-------------------------------
+
+kubectl apply -f car-catalog.yaml
+kubectl get deployment.apps/car-catalog -n car-rating
+kubectl describe deployment.apps/car-catalog -n car-rating
+
+-------------------------------
+
+kubectl apply -f car-catalog-svc.yaml
+
+kubectl get services --all-namespaces
+
+kubectl get endpoints --all-namespaces
+kubectl describe endpoints car-catalog-svc -n car-rating
+
+kubectl scale deployment.apps/car-catalog -n car-rating --replicas=2
+kubectl scale deployment car-catalog -n car-rating --replicas=3
+
+-------------------------------
+
+kubectl port-forward pod/car-catalog-75698c84d7-fr4hf 8081:8081
+
+curl http://localhost:8081/catalog/user/1
+
+------------ END OF SETTING : CAR-CATALOG -------------
+
+
+
+minikube dashboard
+
+
+
+kubectl explain deployment
+kubectl explain deployment.spec
+kubectl explain deployment.spec.template
+kubectl explain deployment.spec.template.spec
+
+
+
+======================================================================
+Create service ans Endpoints
+============================
+
+kubectl apply -f test-external.yaml
+curl 192.168.1.161:8000
+
+kubectl get pods -n car-rating
+kubectl exec -it car-catalog-75698c84d7-fr4hf -- /bin/bash
+
+curl 192.168.1.161:8000     # the real external web server
+curl 10.111.34.83           # the Service (which will redirect trafic to external web server)
+curl external-web           # using DNS name of Service
+
+======================================================================
+
+
+
+test-external.yaml
+---
+  kind: "Service"
+  apiVersion: "v1"
+  metadata:
+    name: "external-web"
+    namespace: "car-rating"
+  spec:
+    ports:
+      - name: "apache"
+        protocol: "TCP"
+        port: 80
+        targetPort: "apache"
+---
+  kind: "Endpoints"
+  apiVersion: "v1"
+  metadata:
+    name: "external-web"
+    namespace: "car-rating"
+  subsets:
+    - addresses:
+        - ip: "192.168.1.161"         #The IP Address of the external web server
+      ports:
+        - port: 8000
+          name: "apache"
+
+

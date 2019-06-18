@@ -9,6 +9,12 @@ Implements a **Car Rating** system. It contains the folling three (3) microservi
 
 ![Logic](Plan.JPG)
 
+
+## Build process
+
+Go in the corresponding directory for each module and execute 
+**mvn package**
+
 ## Versions
 
 #### May 25, 2019

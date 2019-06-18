@@ -39,7 +39,8 @@ public class CarCatalogController {
 		// Contact Ratings service
 		RestTemplate templateRatings = new RestTemplate();
 		//RatingDataList ratings = templateRatings.getForObject("http://localhost:8083/rating/byuser/{userId}", RatingDataList.class, 31);
-		RatingDataList ratings = templateRatings.getForObject("http://rating-data-service:8083/rating/byuser/{userId}", RatingDataList.class, 31);
+		//RatingDataList ratings = templateRatings.getForObject("http://rating-data-service:8083/rating/byuser/{userId}", RatingDataList.class, 31);
+		RatingDataList ratings = templateRatings.getForObject("http://rating-data-service/rating/byuser/{userId}", RatingDataList.class, 31);
 		
 		// For each rating, contact CarInfo service
 		List<CatalogItem> catalog = new ArrayList<CatalogItem>(); 
@@ -47,7 +48,8 @@ public class CarCatalogController {
 		for (RatingData rating : ratings.getRatings()) {
 			System.out.println("checking values on CarInfo service");
 			//String carDesc = templateCarInfo.getForObject("http://localhost:8082/CarDesc/{carId}", String.class, rating.brandId);
-			String carDesc = templateCarInfo.getForObject("http://car-info-service:8082/CarDesc/{carId}", String.class, rating.brandId);
+			//String carDesc = templateCarInfo.getForObject("http://car-info-service:8082/CarDesc/{carId}", String.class, rating.brandId);
+			String carDesc = templateCarInfo.getForObject("http://car-info-service/CarDesc/{carId}", String.class, rating.brandId);
 			catalog.add( new CatalogItem(0, carDesc, rating.rating) );
 		}
 		//return Collections.singletonList(new CatalogItem(1, "2015 Mazda CX-5", 5));

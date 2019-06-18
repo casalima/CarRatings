@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: car-info-service
+  namespace: car-rating
+  labels:
+    run: car-info-service
+spec:
+ selector:
+    run: car-info          # matches pod's label (kay/value pair) 
+ ports:
+  - port: 80
+    protocol: TCP
+    targetPort: car-info   # points to pod's exposed port

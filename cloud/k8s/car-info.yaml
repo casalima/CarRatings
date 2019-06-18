@@ -1,0 +1,44 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: car-info 
+  namespace: car-rating 
+  labels:
+    app-name: car-info 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      run: car-info
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        run: car-info
+    spec:
+      containers:
+      - image: car-info-service
+        imagePullPolicy: IfNotPresent
+        name: car-info 
+        #resources:
+        #  requests:
+        #    cpu: 100m         1000m = 1000m CPU = 1 CPU
+        #    memory: 500Mi     Ki=(2^10)^1   Mi=(2^10)^2     K=(10^3)^1  M=(10^3)^2  
+        #  limits:
+        #    cpu: 500m
+        #    memory: 1024Mi
+        #env:
+        #- name: JAVA_OPTIONS
+        #  value: -Duser.timezone=America/Belize -Duser.country=US -Duser.language=en
+        ports:
+        - name: car-info
+          containerPort: 8082
+          protocol: TCP
+      #dnsPolicy: ClusterFirst
+      #restartPolicy: Always
+---
