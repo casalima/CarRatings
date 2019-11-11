@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sandro</groupId>
+	<artifactId>car-dealer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>car-dealer</name>
+	<description>Demo multi module project using Spring Boot</description>
+
+	<modules>
+		<module>car-catalog-service</module>
+		<module>car-info-service</module>
+		<module>rating-data-service</module>
+	</modules>
+
+</project>
