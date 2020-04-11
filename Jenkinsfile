@@ -1,4 +1,5 @@
-def globalworkspace
+def workspace
+def owner
 
 node ('master'){
 
@@ -15,4 +16,21 @@ node ('master'){
 		echo "the_build_process"
 	}
 	
+	stage('Unit testing'){
+		echo "the_unit_test"
+	}
+	
+	stage('Deploying application'){
+		echo "the_deployment"
+		
+		owner = "Sandro"
+		createGreeting(owner)
+	}
+	
+}
+
+def String createGreeting(String name)
+{
+	def greeting = "Hi ${name}. I just finished deploying this app "
+	return greeting
 }
