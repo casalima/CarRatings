@@ -24,7 +24,7 @@ node ('master'){
 		echo "the_deployment"
 		
 		owner = "Sandro"
-		createGreeting(owner)
+		echo createGreeting(owner)
 	}
 	
 }
