@@ -13,6 +13,7 @@ node ('master'){
 //		build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
 //	}
 
+/*
 	stage('Static code analysis'){
 	
 	    environment {
@@ -31,7 +32,11 @@ node ('master'){
 		}
 	
 	}
+*/
 	
+    stage('Static code analysis') {
+        analyzeWithSonarQubeAndWaitForQualityGoal()
+    }
 	
 	stage('Build process using Maven'){
 		echo "the_build_process"
@@ -51,8 +56,23 @@ node ('master'){
 	
 }
 
-def String createGreeting(String name)
-{
+def String createGreeting(String name){
+
 	def greeting = "Hi ${name}. I just finished deploying this app "
 	return greeting
+}
+
+
+def void analyzeWithSonarQubeAndWaitForQualityGoal() {
+
+    withSonarQubeEnv('somesonarqube') {
+        mvn ‘${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} ${SONAR_EXTRA_PROPS} ‘
+    }
+	
+    timeout(time: 2, unit: 'MINUTES') {
+        def qg = waitForQualityGate()
+        if (qg.status != 'OK') {
+            currentBuild.result = 'UNSTABLE'
+        }
+    }
 }
