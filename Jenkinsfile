@@ -19,9 +19,7 @@ node ('master'){
 			scannerHome = tool 'LocalSonarQubeScanner'
 		}
 	
-		step {
-		
-			echo "some_static_code_tool_will_analyze"
+		steps {
 			
 			withSonarQubeEnv('somesonarqube') {
 				sh "${scannerHome}/bin/sonar-scanner"
