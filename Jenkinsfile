@@ -8,10 +8,10 @@ node ('master'){
 		workspace = pwd()
 	}
 
-	//stage('Static code analysis'){
-		//echo "some_static_code_tool_will_analyze"
-		//build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
-	//}
+//	stage('Static code analysis'){
+//		echo "some_static_code_tool_will_analyze"
+//		build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
+//	}
 
 	stage('Static code analysis'){
 	
