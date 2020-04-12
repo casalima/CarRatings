@@ -68,7 +68,8 @@ def void analyzeWithSonarQubeAndWaitForQualityGoal() {
     withSonarQubeEnv('LocalSonarQubeServer') {
 		echo env.SONAR_MAVEN_GOAL
 		echo bat(returnStdout: true, script: 'set')
-        bat "mvn ${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} ${SONAR_EXTRA_PROPS}"
+        bat "mvn ${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} "
+//		${SONAR_EXTRA_PROPS}
     }
 	
     timeout(time: 2, unit: 'MINUTES') {
