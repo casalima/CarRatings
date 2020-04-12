@@ -10,6 +10,7 @@ node ('master'){
 
 	stage('Static code analysis'){
 		echo "some_static_code_tool_will_analyze"
+		build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
 	}
 	
 	stage('Build process using Maven'){
@@ -24,7 +25,8 @@ node ('master'){
 		echo "the_deployment"
 		
 		owner = "Sandro"
-		echo createGreeting(owner)
+		def response = createGreeting(owner)
+		echo response
 	}
 	
 }
