@@ -19,7 +19,7 @@ node ('master'){
 			scannerHome = tool 'LocalSonarQubeScanner'
 		}
 	
-		steps {
+		step {
 		
 			echo "some_static_code_tool_will_analyze"
 			
