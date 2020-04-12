@@ -8,10 +8,32 @@ node ('master'){
 		workspace = pwd()
 	}
 
+	//stage('Static code analysis'){
+		//echo "some_static_code_tool_will_analyze"
+		//build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
+	//}
+
 	stage('Static code analysis'){
-		echo "some_static_code_tool_will_analyze"
-		build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
+	
+	    environment {
+			scannerHome = tool 'LocalSonarQubeScanner'
+		}
+	
+		steps {
+		
+			echo "some_static_code_tool_will_analyze"
+			
+			withSonarQubeEnv('somesonarqube') {
+				sh "${scannerHome}/bin/sonar-scanner"
+			}
+			
+			timeout(time: 10, unit: 'MINUTES') {
+				waitForQualityGate abortPipeline: true
+			}
+		}
+	
 	}
+	
 	
 	stage('Build process using Maven'){
 		echo "the_build_process"
