@@ -8,10 +8,10 @@ node ('master'){
 		workspace = pwd()
 	}
 
-//	stage('Static code analysis'){
-//		echo "some_static_code_tool_will_analyze"
-//		build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
-//	}
+	//stage('Static code analysis'){
+	//	echo "some_static_code_tool_will_analyze"
+	//	build job: 'NewPipeline-CodeAnalysis', parameters: [string(name: 'workspace', value: workspace)]
+	//}
 
 /*
 	stage('Static code analysis'){
@@ -66,10 +66,10 @@ def String createGreeting(String name){
 def void analyzeWithSonarQubeAndWaitForQualityGoal() {
 
     withSonarQubeEnv('LocalSonarQubeServer') {
-		echo env.SONAR_MAVEN_GOAL
-		echo bat(returnStdout: true, script: 'set')
+		//echo env.SONAR_MAVEN_GOAL
+		//echo bat(returnStdout: true, script: 'set')
         bat "mvn clean package ${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} "
-//		${SONAR_EXTRA_PROPS}
+		//${SONAR_EXTRA_PROPS}
     }
 	
     timeout(time: 2, unit: 'MINUTES') {
