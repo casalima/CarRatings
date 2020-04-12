@@ -34,6 +34,14 @@ node ('master'){
 	}
 */
 	
+    stage('Maven clean and compile') {
+        bat "mvn clean compile"
+    }
+
+    stage('Maven test') {
+        bat "mvn test"
+    }
+
     stage('Static code analysis') {
         analyzeWithSonarQubeAndWaitForQualityGoal()
     }
@@ -68,7 +76,8 @@ def void analyzeWithSonarQubeAndWaitForQualityGoal() {
     withSonarQubeEnv('LocalSonarQubeServer') {
 		//echo env.SONAR_MAVEN_GOAL
 		//echo bat(returnStdout: true, script: 'set')
-        bat "mvn clean package ${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} "
+        //bat "mvn clean package ${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} "
+        bat "mvn ${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} "
 		//${SONAR_EXTRA_PROPS}
     }
 	
