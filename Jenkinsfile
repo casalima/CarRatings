@@ -65,7 +65,7 @@ def String createGreeting(String name){
 
 def void analyzeWithSonarQubeAndWaitForQualityGoal() {
 
-    withSonarQubeEnv('somesonarqube') {
+    withSonarQubeEnv('LocalSonarQubeScanner') {
         mvn '${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} ${SONAR_EXTRA_PROPS}'
     }
 	
