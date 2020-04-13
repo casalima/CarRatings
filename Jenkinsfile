@@ -34,11 +34,11 @@ node ('master'){
 	}
 */
 	
-    stage('Maven clean and compile') {
+    stage('Clean and compile') {
         bat "mvn clean compile"
     }
 
-    stage('Maven test') {
+    stage('Unit testing') {
         bat "mvn test"
     }
 
@@ -46,12 +46,22 @@ node ('master'){
         analyzeWithSonarQubeAndWaitForQualityGoal()
     }
 	
-	stage('Build process using Maven'){
-		echo "the_build_process"
+	stage('Parallel execution'){
+		parallel 
+			task1 : {
+				stage('Task 1'){
+					echo "Task 1"
+				}
+			},
+			task2 : {
+				stage('Task 2'){
+					echo "Task 2"
+				}
+			}
 	}
 	
-	stage('Unit testing'){
-		echo "the_unit_test"
+	stage('Build process using Maven'){
+		echo "the_build_process"
 	}
 	
 	stage('Deploying application'){
