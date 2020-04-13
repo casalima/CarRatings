@@ -48,12 +48,12 @@ node ('master'){
 	
 	stage('Parallel execution'){
 		parallel 
-			task1 : {
+			'task1' : {
 				stage('Task 1'){
 					echo "Task 1"
 				}
 			},
-			task2 : {
+			'task2' : {
 				stage('Task 2'){
 					echo "Task 2"
 				}
