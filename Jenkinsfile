@@ -47,17 +47,16 @@ node ('master'){
     }
 	
 	stage('Parallel execution'){
-		parallel 
-			task1: {
-				stage('Task 1'){
-					echo "Task 1"
-				}
-			},
-			task2: {
-				stage('Task 2'){
-					echo "Task 2"
-				}
+		parallel task1: {
+			stage('Task 1'){
+				echo "Task 1"
 			}
+		},
+		task2: {
+			stage('Task 2'){
+				echo "Task 2"
+			}
+		}
 	}
 	
 	stage('Build process using Maven'){
